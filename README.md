@@ -27,14 +27,14 @@ head -c 6 file.txt (mencetak isi file sebanyak 6 byte pada baris pertama)
 head -q  file1.txt file2.txt (digunakan jika file lebih dari 1, akan mencetak sebanyak 20 baris)
 head -v file.txt (selain mencetak 10 baris dari isi file, akan mencetak nama filenya pada baris pertama)
 
-- **cp (biasa, -R, *)**
+- **cp (biasa, -R, \*)**
 Meng-copy file.
 Contoh: 
 cp file1.c file2.c  -> meng-copy file1.c menjadi file2.c
 cp -r dir1 dir2     -> meng-copy direktori dir1 menjadi dir2
 cp * /var/www/html  -> meng-copy semua file di direktori saat ini ke /var/www/html
 
-- **mv (biasa, *)**
+- **mv (biasa, \*)**
 Perintah ini digunakan untuk memindahkan file-file ke folder tujuan.
 Contoh:
 mv file1.txt ../Tujuan/
