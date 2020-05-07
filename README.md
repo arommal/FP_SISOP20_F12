@@ -11,11 +11,11 @@
 - [x] `head -c`
 - [x] `head -q`
 - [x] `head -v`
-- [ ] `cp`
-- [ ] `cp -r`
-- [ ] `cp *`
-- [ ] `mv`
-- [ ] `mv *`
+- [x] `cp`
+- [x] `cp -r`
+- [x] `cp *`
+- [x] `mv`
+- [x] `mv *`
 
 ## Operasi
 - **cd**\
