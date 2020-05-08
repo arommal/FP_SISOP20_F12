@@ -6,7 +6,7 @@
 
 ## Overview
 - [x] `cd`
-- [ ] `chmod`
+- [x] `chmod`
 - [x] `head -n`
 - [x] `head -c`
 - [x] `head -q`

@@ -185,6 +185,7 @@ UPROGS=\
 	_touch\
 	_cp\
 	_mv\
+	_chmod\
 
 fs.img: mkfs TestFile README $(UPROGS)
 	./mkfs fs.img TestFile README $(UPROGS)
@@ -259,6 +260,7 @@ EXTRA=\
 	.gdbinit.tmpl gdbutil\
 	head.c\
 	touch.c\
+	chmod.c\
 
 dist:
 	rm -rf dist
