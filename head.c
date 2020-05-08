@@ -46,11 +46,6 @@ void head(char *filename, int defline, int mode){
 }
 
 int main(int argc, char *argv[]){
-    if(argc <= 1){
-        printf(2, "head: missing arguments\n");
-        exit();
-    }
-
     int i, mode = 1, n = 10;
     
     for(i=1; i<argc; i++){
