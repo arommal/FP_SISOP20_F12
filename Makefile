@@ -186,6 +186,7 @@ UPROGS=\
 	_cp\
 	_mv\
 	_chmod\
+	_cd\
 
 fs.img: mkfs TestFile README $(UPROGS)
 	./mkfs fs.img TestFile README $(UPROGS)
@@ -261,6 +262,7 @@ EXTRA=\
 	head.c\
 	touch.c\
 	chmod.c\
+	cd.c\
 
 dist:
 	rm -rf dist
