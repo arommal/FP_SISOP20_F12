@@ -454,13 +454,16 @@ sys_chmod(void)
     return -1;
   if(argint(1, (int*)&mode) < 0)
     return -1;
+
+  if(mode > 01777)
+    return -1;
   struct inode *ip = namei(pathname);
   if(!ip)
     return -1;
   
   begin_op();
   ilock(ip);
-  ip->mode &= ~0xFFF;
+  // ip->mode &= ~0xFFF;
   ip->mode = (mode & 0xFFF);
   iunlock(ip);
   iupdate(ip);

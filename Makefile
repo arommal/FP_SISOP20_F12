@@ -51,7 +51,7 @@ TOOLPREFIX := $(shell if i386-jos-elf-objdump -i 2>&1 | grep '^elf32-i386$$' >/d
 endif
 
 # If the makefile can't find QEMU, specify its path here
-# QEMU = qemu-system-i386
+# QEMU = qemu-system-x86_64
 
 # Try to infer the correct QEMU
 ifndef QEMU
@@ -185,11 +185,11 @@ UPROGS=\
 	_touch\
 	_cp\
 	_mv\
-	_chmod\
 	_cd\
+	_chmod\
 
-fs.img: mkfs TestFile README $(UPROGS)
-	./mkfs fs.img TestFile README $(UPROGS)
+fs.img: mkfs aaa README $(UPROGS)
+	./mkfs fs.img aaa README $(UPROGS)
 
 -include *.d
 
@@ -197,12 +197,12 @@ clean:
 	rm -f *.tex *.dvi *.idx *.aux *.log *.ind *.ilg \
 	*.o *.d *.asm *.sym vectors.S bootblock entryother \
 	initcode initcode.out kernel xv6.img fs.img kernelmemfs \
-	xv6memfs.img mkfs .gdbinit \
+	xv6memfs.img mkfs aaa .gdbinit \
 	$(UPROGS)
 
 # make a printout
 FILES = $(shell grep -v '^\#' runoff.list)
-PRINT = runoff.list runoff.spec TestFile README toc.hdr toc.ftr $(FILES)
+PRINT = runoff.list runoff.spec aaa README toc.hdr toc.ftr $(FILES)
 
 xv6.pdf: $(PRINT)
 	./runoff
@@ -255,14 +255,11 @@ qemu-nox-gdb: fs.img xv6.img .gdbinit
 
 EXTRA=\
 	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
-	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c cp.c mv.c\
+	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
 	printf.c umalloc.c\
-	TestFile README dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
+	README aaa dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
 	.gdbinit.tmpl gdbutil\
-	head.c\
-	touch.c\
-	chmod.c\
-	cd.c\
+	cd.c chmod.c cp.c head.c mv.c\
 
 dist:
 	rm -rf dist

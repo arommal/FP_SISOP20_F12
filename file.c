@@ -9,6 +9,22 @@
 #include "spinlock.h"
 #include "sleeplock.h"
 #include "file.h"
+#include "stat.h"
+
+#define S_IRWXU 00700
+#define S_IRUSR 00400
+#define S_IWUSR 00200
+#define S_IXUSR 00100
+
+#define S_IRWXG 00070
+#define S_IRGRP 00040
+#define S_IWGRP 00020
+#define S_IXGRP 00010
+
+#define S_IRWXO 00007
+#define S_IROTH 00004
+#define S_IWOTH 00002
+#define S_IXOTH 00001
 
 struct devsw devsw[NDEV];
 struct {
@@ -104,8 +120,17 @@ fileread(struct file *f, char *addr, int n)
     return piperead(f->pipe, addr, n);
   if(f->type == FD_INODE){
     ilock(f->ip);
+
+    struct stat st;
+    stati(f->ip, &st);
+
+    if(!(st.mode & S_IRUSR)){
+      return -1;
+    }
+
     if((r = readi(f->ip, addr, f->off, n)) > 0)
       f->off += r;
+    
     iunlock(f->ip);
     return r;
   }
@@ -139,6 +164,14 @@ filewrite(struct file *f, char *addr, int n)
 
       begin_op();
       ilock(f->ip);
+
+      struct stat st;
+      stati(f->ip, &st);
+
+      if(!(st.mode & S_IWUSR)){
+        return -1;
+      }
+
       if ((r = writei(f->ip, addr + i, f->off, n1)) > 0)
         f->off += r;
       iunlock(f->ip);

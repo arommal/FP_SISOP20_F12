@@ -13,8 +13,6 @@
 
 #define MAXARGS 10
 
-char path[100];
-
 struct cmd {
   int type;
 };
@@ -135,7 +133,7 @@ runcmd(struct cmd *cmd)
 int
 getcmd(char *buf, int nbuf)
 {
-  printf(2, "/%s>", path);
+  printf(2, "$ ");
   memset(buf, 0, nbuf);
   gets(buf, nbuf);
   if(buf[0] == 0) // EOF
